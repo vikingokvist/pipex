@@ -26,8 +26,8 @@ typedef struct s_pipex
 	int		fd[2];
 	pid_t	pid1;
 	pid_t	pid2;
-	int		fd1;
-	int		fd2;
+	int		infile;
+	int		outfile;
 	char	**argv_cmd1;
 	char	**argv_cmd2;
 	char	*full_path1;
@@ -35,10 +35,13 @@ typedef struct s_pipex
 }	t_pipex;
 
 int		main(int argc, char **argv, char **envp);
-void	error(t_pipex *pipex, char c);
-void	free_pipex(t_pipex *pipex);
 void	init_struct(t_pipex *pipex);
-void	init_process(t_pipex *pipex, char **argv);
-void	do_commands(t_pipex *pipex, char **argv, char **envp);
+void	init_fds(t_pipex *pipex, char **argv);
+void	get_commands(t_pipex *pipex, char **argv);
+void	do_forks(t_pipex *pipex, char **envp);
+
+void	error(t_pipex *pipex, char c);
+void	close_fds(t_pipex *pipex);
+void	free_pipex(t_pipex *pipex);
 
 #endif

@@ -12,18 +12,26 @@
 
 #include "../includes/pipex.h"
 
+void	close_fds(t_pipex *pipex)
+{
+	close(pipex->fd[0]);
+	close(pipex->fd[1]);
+    close(pipex->infile);
+	close(pipex->outfile);
+}
+
 void	free_pipex(t_pipex *pipex)
 {
 	int	i;
 
 	if (pipex->fd[0] != -1)
-		close(pipex->fd[0]);
-	if (pipex->fd[1] != -1)
-		close(pipex->fd[1]);
-	if (pipex->fd1 != -1)
-		close(pipex->fd1);
-	if (pipex->fd2 != -1)
-		close(pipex->fd2);
+    	close(pipex->fd[0]);
+    if (pipex->fd[1] != -1)
+    	close(pipex->fd[1]);
+    if (pipex->infile != -1)
+    	close(pipex->infile);
+    if	(pipex->outfile != -1)
+		close(pipex->outfile);
 	if (pipex->full_path1)
 		free(pipex->full_path1);
 	if (pipex->full_path1)
@@ -36,7 +44,12 @@ void	free_pipex(t_pipex *pipex)
 	while (pipex->argv_cmd2 && pipex->argv_cmd2[i])
 		free(pipex->argv_cmd2[i++]);
 	free(pipex->argv_cmd2);
-	exit(1);
+
+    for (int fd = 0; fd < 1024; fd++)
+    {
+        if (fcntl(fd, F_GETFD) != -1)
+            printf("FD %d is open\n", fd);
+    }
 }
 
 void	error(t_pipex *pipex, char c)
@@ -60,5 +73,7 @@ void	error(t_pipex *pipex, char c)
 		perror("Processing Path.\n");
 	else if (c == 'D')
 		perror("Creating dup2.\n");
+	else if (c == 'E')
+		perror("Execve.\n");
 	exit(1);
 }

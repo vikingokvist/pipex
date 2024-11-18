@@ -18,9 +18,9 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc != 5)
 		error(&pipex, 'A');
-	init_struct(&pipex);
-	init_process(&pipex, argv);
-	do_commands(&pipex, argv, envp);
+	init_fds(&pipex, argv);
+	get_commands(&pipex, argv);
+	do_forks(&pipex, envp);
 	error(&pipex, '!');
 	return (0);
 }

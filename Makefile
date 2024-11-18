@@ -9,8 +9,8 @@ NO_PRINT = --no-print-directory
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-SRCS_SRC = src/main.c src/init_process.c src/error.c src/do_commands.c \
-	src/init_struct.c
+SRCS_SRC = src/main.c src/init_process.c src/error.c src/get_commands.c \
+	src/forks.c
 
 OBJS_SRC = $(SRCS_SRC:.c=.o)
 

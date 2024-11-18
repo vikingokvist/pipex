@@ -12,13 +12,13 @@
 
 #include "../includes/pipex.h"
 
-void	init_process(t_pipex *pipex, char **argv)
+void	init_fds(t_pipex *pipex, char **argv)
 {
-	pipex->fd1 = open(argv[1], O_RDONLY);
-	if (pipex->fd1 == -1)
+	pipex->infile = open(argv[1], O_RDONLY);
+	if (pipex->infile == -1)
 		error(pipex, 'O');
-	pipex->fd2 = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
-	if (pipex->fd2 == -1)
+	pipex->outfile = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
+	if (pipex->outfile == -1)
 		error(pipex, 'o');
 	if (pipe(pipex->fd) == -1)
 		error(pipex, 'P');

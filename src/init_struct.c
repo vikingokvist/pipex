@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ctommasi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/18 11:00:57 by ctommasi          #+#    #+#             */
-/*   Updated: 2024/11/18 11:00:59 by ctommasi         ###   ########.fr       */
+/*   Created: 2024/11/18 16:44:19 by ctommasi          #+#    #+#             */
+/*   Updated: 2024/11/18 16:44:20 by ctommasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-int	main(int argc, char **argv, char **envp)
+void	init_struct(t_pipex *pipex)
 {
-	t_pipex		pipex;
-
-	if (argc != 5)
-		error(&pipex, 'A');
-	init_struct(&pipex);
-	init_process(&pipex, argv);
-	do_commands(&pipex, argv, envp);
-	error(&pipex, '!');
-	return (0);
+	pipex->fd1 = -1;
+	pipex->fd1 = -1;
+	pipex->fd[0] = -1;
+	pipex->fd[1] = -1;
+	pipex->pid1 = -1;
+	pipex->pid2 = -1;
+	pipex->argv_cmd1 = NULL;
+	pipex->argv_cmd2 = NULL;
+	pipex->full_path1 = NULL;
+	pipex->full_path2 = NULL;
 }

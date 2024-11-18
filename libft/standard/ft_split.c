@@ -12,16 +12,6 @@
 
 #include "../includes/libft.h"
 
-static void	*ft_malloc(size_t size)
-{
-	void	*ptr;
-
-	ptr = malloc(size);
-	if (ptr == NULL)
-		return (NULL);
-	return (ptr);
-}
-
 static void	ft_free_all(char **res, size_t i)
 {
 	while (i > 0)
@@ -79,14 +69,14 @@ char	**ft_split(char const *s, char c)
 
 	i = 0;
 	j = 0;
-	res = (char **)ft_malloc((ft_array_len(s, c) + 1) * sizeof(char *));
-	if (res == NULL)
+	res = malloc((ft_array_len(s, c) + 1) * sizeof(char *));
+	if (!res)
 		return (ft_free_all(res, i), NULL);
 	while (i < ft_array_len(s, c))
 	{
 		while (s[j] == c)
 			j++;
-		res[i] = (char *)ft_malloc((ft_word_len(s, c, j) + 1) * sizeof(char));
+		res[i] = malloc((ft_word_len(s, c, j) + 1) * sizeof(char));
 		if (!res[i])
 			return (ft_free_all(res, i), NULL);
 		k = 0;

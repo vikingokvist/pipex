@@ -46,28 +46,34 @@ void	free_pipex_b(t_pipex_b *pipex)
 {
 	int	i;
 
+	if (!pipex)
+		return ;
+	i = 0;
+	while (pipex->argv_cmd[i] || pipex->full_path[i])
+	{
+		if (pipex->argv_cmd[i])
+		{
+			free(pipex->argv_cmd[i]);
+			pipex->argv_cmd[i] = NULL;
+		}
+		if (pipex->full_path[i])
+		{
+			free(pipex->full_path[i]);
+			pipex->argv_cmd[i] = NULL;
+		}
+		i++;
+	}
 	if (pipex->argv_cmd)
 	{
-		i = 0;
-		while (pipex->argv_cmd[i])
-		{
-			if (pipex->argv_cmd[i])
-				free(pipex->argv_cmd[i]);
-			i++;
-		}
 		free(pipex->argv_cmd);
+		pipex->argv_cmd = NULL;
 	}
 	if (pipex->full_path)
 	{
-		i = 0;
-		while (pipex->full_path[i])
-		{
-			if (pipex->full_path[i])
-				free(pipex->full_path[i]);
-			i++;
-		}
 		free(pipex->full_path);
+		pipex->full_path = NULL;
 	}
+		
 }
 
 void	error_b(t_pipex_b *pipex, char c)

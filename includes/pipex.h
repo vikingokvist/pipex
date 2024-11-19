@@ -35,13 +35,33 @@ typedef struct s_pipex
 }	t_pipex;
 
 int		main(int argc, char **argv, char **envp);
-void	init_struct(t_pipex *pipex);
 void	init_fds(t_pipex *pipex, char **argv);
 void	get_commands(t_pipex *pipex, char **argv);
 void	do_forks(t_pipex *pipex, char **envp);
-
 void	error(t_pipex *pipex, char c);
 void	close_fds(t_pipex *pipex);
 void	free_pipex(t_pipex *pipex);
+
+typedef struct s_pipex_b
+{
+	int		fd[2];
+	pid_t	pid;
+	int		infile;
+	int		outfile;
+	char	**argv_cmd;
+	char	**full_path;
+	int		n_cmds;
+	char	**envp;
+}	t_pipex_b;
+
+void	get_commands_b(t_pipex_b *pipex, char **argv, int i);
+void	init_fds_b(t_pipex_b *pipex, int argc, char **argv);
+void	error_b(t_pipex_b *pipex, char c);
+void	free_pipex_b(t_pipex_b *pipex);
+void	close_fds_b(t_pipex_b *pipex);
+void	do_forks_b(t_pipex_b *pipex);
+void	free_array(char **array);
+void	init_struct(t_pipex_b *pipex, int argc, char **envp);
+void	swap_fds(t_pipex_b *pipex, int in_fd, int j);
 
 #endif

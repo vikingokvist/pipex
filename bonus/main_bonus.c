@@ -15,18 +15,12 @@
 int	main(int argc, char **argv, char **envp)
 {
 	t_pipex_b	pipex;
-	int			i;
 
 	if (argc < 5)
 		error_b(&pipex, 'A');
 	init_struct(&pipex, argc, envp);
 	init_fds_b(&pipex, argc, argv);
-	i = 2;
-	while (i < argc - 1)
-	{
-		get_commands_b(&pipex, argv, i);
-		i++;
-	}
+	get_commands_b(&pipex, argv);
 	do_forks_b(&pipex);
 	error_b(&pipex, '!');
 	return (0);

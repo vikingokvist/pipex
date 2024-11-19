@@ -33,10 +33,8 @@ void	close_fds_b(t_pipex_b *pipex)
 		close(pipex->infile);
 	if (pipex->outfile != -1)
 		close(pipex->outfile);
-	if (pipex->fd[0] != -1)
-		close(pipex->fd[0]);
-	if (pipex->fd[1] != -1)
-		close(pipex->fd[1]);
+	if (pipex->temp_fd != -1)
+		close(pipex->temp_fd);
 	close(0);
 	close(1);
 	close(2);
@@ -46,34 +44,22 @@ void	free_pipex_b(t_pipex_b *pipex)
 {
 	int	i;
 
-	if (!pipex)
-		return ;
 	i = 0;
-	while (pipex->argv_cmd[i] || pipex->full_path[i])
-	{
-		if (pipex->argv_cmd[i])
-		{
-			free(pipex->argv_cmd[i]);
-			pipex->argv_cmd[i] = NULL;
-		}
-		if (pipex->full_path[i])
-		{
-			free(pipex->full_path[i]);
-			pipex->argv_cmd[i] = NULL;
-		}
-		i++;
-	}
+	
 	if (pipex->argv_cmd)
-	{
 		free(pipex->argv_cmd);
-		pipex->argv_cmd = NULL;
-	}
-	if (pipex->full_path)
+	i = 0;
+	if (pipex->full_path[i])
 	{
-		free(pipex->full_path);
-		pipex->full_path = NULL;
-	}
-		
+		while (i < pipex->n_cmds)
+		{
+			if (pipex->full_path[i])
+				free(pipex->full_path[i]);
+			i++;
+		}
+		if (pipex->full_path)
+			free(pipex->full_path);
+	}		
 }
 
 void	error_b(t_pipex_b *pipex, char c)
@@ -83,7 +69,7 @@ void	error_b(t_pipex_b *pipex, char c)
 	if (c != '!')
 		perror("Error\n");
 	if (c == 'A')
-		perror("Wrong mount of Arguments.\n./pipex infile cmd1 cmd2 outfile");
+		perror("Wrong amount of Arguments.\n./pipex infile cmd1 cmd2 cmd3 etc.. outfile");
 	else if (c == 'O')
 		perror("Opening infile.\n");
 	else if (c == 'o')

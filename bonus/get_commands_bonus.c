@@ -12,20 +12,25 @@
 
 #include "../includes/pipex.h"
 
-void	get_commands_b(t_pipex_b *pipex, char **argv, int i)
+void	get_commands_b(t_pipex_b *pipex, char **argv)
 {
-	int		j;
+	int		i;
 	char	**temp1;
 
-	j = i - 2;
-	temp1 = ft_split(argv[i], ' ');
-	if (!temp1)
-		error_b(pipex, 'p');
-	pipex->argv_cmd[j] = ft_strdup(argv[i]);
-	if (!pipex->argv_cmd[j])
-		error_b(pipex, 'p');
-	pipex->full_path[j] = ft_strjoin("/usr/bin/", temp1[0]);
-	if (!pipex->full_path[j])
-		error_b(pipex, 'p');
-	free_array(temp1);
+	i = 0;
+	while (i < pipex->n_cmds)
+	{
+		temp1 = ft_split(argv[i + 2], ' ');
+		if (!temp1)
+			error_b(pipex, 'p');
+		pipex->argv_cmd[i] = argv[i + 2];
+		if (!pipex->argv_cmd[i])
+			error_b(pipex, 'p');
+		pipex->full_path[i] = ft_strjoin("/usr/bin/", temp1[0]);
+		if (!pipex->full_path[i])
+			error_b(pipex, 'p');
+		free_array(temp1);
+		i++;
+	}
+	
 }

@@ -24,14 +24,6 @@ void	free_pipex(t_pipex *pipex)
 {
 	int	i;
 
-	if (pipex->fd[0] != -1)
-		close(pipex->fd[0]);
-	if (pipex->fd[1] != -1)
-		close(pipex->fd[1]);
-	if (pipex->infile != -1)
-		close(pipex->infile);
-	if (pipex->outfile != -1)
-		close(pipex->outfile);
 	if (pipex->full_path1)
 		free(pipex->full_path1);
 	if (pipex->full_path1)

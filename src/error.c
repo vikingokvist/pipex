@@ -44,6 +44,9 @@ void	free_pipex(t_pipex *pipex)
 	while (pipex->argv_cmd2 && pipex->argv_cmd2[i])
 		free(pipex->argv_cmd2[i++]);
 	free(pipex->argv_cmd2);
+	close(0);
+	close(1);
+	close(2);
 }
 
 void	error(t_pipex *pipex, char c)
@@ -71,8 +74,3 @@ void	error(t_pipex *pipex, char c)
 		perror("Execve.\n");
 	exit(1);
 }
-// for (int fd = 0; fd < 1024; fd++)
-	// {
-	// 	if (fcntl(fd, F_GETFD) != -1)
-	// 		printf("FD %d is open\n", fd);
-	// }

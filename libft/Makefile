@@ -37,28 +37,28 @@ OBJS_GNL = $(SRC_GNL:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS_STANDARD) $(OBJS_LNKD_LST) $(OBJS_FTPRINTF) $(OBJS_GNL)
-	$(AR) $(NAME) $(OBJS_STANDARD) $(OBJS_LNKD_LST) $(OBJS_FTPRINTF) $(OBJS_GNL)
+	@$(AR) $(NAME) $(OBJS_STANDARD) $(OBJS_LNKD_LST) $(OBJS_FTPRINTF) $(OBJS_GNL)
 
 standard: $(OBJS_STANDARD)
-	$(AR) $(NAME) $(OBJS_STANDARD)
+	@$(AR) $(NAME) $(OBJS_STANDARD)
 
 linked_lists: $(OBJS_LNKD_LST)
-	$(AR) $(NAME) $(OBJS_LNKD_LST)
+	@$(AR) $(NAME) $(OBJS_LNKD_LST)
 
 ft_printf: $(OBJS_FTPRINTF)
-	$(AR) $(NAME) $(OBJS_FTPRINTF)
+	@$(AR) $(NAME) $(OBJS_FTPRINTF)
 
 gnl: $(OBJS_GNL)
-	$(AR) $(NAME) $(OBJS_GNL)
+	@$(AR) $(NAME) $(OBJS_GNL)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(OBJS_STANDARD) $(OBJS_LNKD_LST) $(OBJS_FTPRINTF) $(OBJS_GNL)
+	@$(RM) $(OBJS_STANDARD) $(OBJS_LNKD_LST) $(OBJS_FTPRINTF) $(OBJS_GNL)
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re: fclean all
 

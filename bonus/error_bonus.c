@@ -63,10 +63,13 @@ void	free_pipex_b(t_pipex_b *pipex)
 
 void	error_b(t_pipex_b *pipex, char c)
 {
-	free_pipex_b(pipex);
-	close_fds_b(pipex);
+	if (c != 'A')
+	{
+		free_pipex_b(pipex);
+		close_fds_b(pipex);
+	}
 	if (c != '!')
-		perror("Error\n");
+		perror("Error: ");
 	if (c == 'A')
 		perror("Wrong amount of Arguments.\n./pipex infile cmd1 etc.. outfile");
 	else if (c == 'O')
@@ -76,9 +79,7 @@ void	error_b(t_pipex_b *pipex, char c)
 	else if (c == 'P')
 		perror("Creating Pipe.\n");
 	else if (c == 'F')
-		perror("Creating Fork #1.\n");
-	else if (c == 'f')
-		perror("Creating Fork #2.\n");
+		perror("Creating Fork.\n");
 	else if (c == 'p')
 		perror("Processing Path.\n");
 	else if (c == 'D')

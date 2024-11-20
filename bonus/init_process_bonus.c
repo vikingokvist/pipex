@@ -25,6 +25,7 @@ static void	here_doc(t_pipex_b *pipex, char **argv)
 		buf = get_next_line(0);
 		if (!ft_strncmp(buf, argv[2], ft_strlen(argv[2])))
 		{
+			get_next_line(-1);
 			free(buf);
 			break ;
 		}

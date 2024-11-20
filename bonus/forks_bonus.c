@@ -41,6 +41,8 @@ void	do_forks_b(t_pipex_b *pipex)
 		if (pipe(pipex->fd) == -1)
 			error_b(pipex, 'P');
 		pipex->pid = fork();
+		if (pipex->pid == -1)
+			error_b(pipex, 'F');
 		if (pipex->pid == 0)
 			swap_fds(pipex, i);
 		close(pipex->fd[1]);

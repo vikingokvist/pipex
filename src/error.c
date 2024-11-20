@@ -41,11 +41,19 @@ void	free_pipex(t_pipex *pipex)
 	close(2);
 }
 
+static void	close_them(void)
+{
+	close(0);
+	close(1);
+	close(2);
+}
+
 void	error(t_pipex *pipex, char c)
 {
+	if (c != 'A')
+		free_pipex(pipex);
 	if (c != '!')
 		perror("Error\n");
-	free_pipex(pipex);
 	if (c == 'A')
 		perror("Wrong mount of Arguments.\n./pipex infile cmd1 cmd2 outfile");
 	else if (c == 'O')
@@ -56,13 +64,12 @@ void	error(t_pipex *pipex, char c)
 		perror("Creating Pipe.\n");
 	else if (c == 'F')
 		perror("Creating Fork #1.\n");
-	else if (c == 'f')
-		perror("Creating Fork #2.\n");
 	else if (c == 'p')
 		perror("Processing Path.\n");
 	else if (c == 'D')
 		perror("Creating dup2.\n");
 	else if (c == 'E')
 		perror("Execve.\n");
+	close_them();
 	exit(1);
 }

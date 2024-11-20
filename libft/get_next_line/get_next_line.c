@@ -18,7 +18,11 @@ char	*get_next_line(int fd)
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || fd > FOPEN_MAX)
+	{
+		if (total_chars)
+			free(total_chars);
 		return (NULL);
+	}
 	total_chars = ft_read_line(fd, total_chars);
 	if (total_chars == NULL)
 		return (NULL);

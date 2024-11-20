@@ -40,9 +40,6 @@ static void	here_doc(t_pipex_b *pipex, char **argv)
 
 void	init_fds_b(t_pipex_b *pipex, int argc, char **argv)
 {
-	pipex->outfile = open(argv[argc - 1], O_CREAT | O_RDWR | O_TRUNC, 0644);
-	if (pipex->outfile == -1)
-		error_b(pipex, 'o');
 	if (!ft_strcmp(argv[1], "here_doc"))
 	{
 		here_doc(pipex, argv);
@@ -55,4 +52,7 @@ void	init_fds_b(t_pipex_b *pipex, int argc, char **argv)
 			error_b(pipex, 'O');
 		pipex->n = 3;
 	}
+	pipex->outfile = open(argv[argc - 1], O_CREAT | O_RDWR | O_TRUNC, 0644);
+	if (pipex->outfile == -1)
+		error_b(pipex, 'o');
 }

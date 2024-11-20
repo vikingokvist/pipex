@@ -12,6 +12,13 @@
 
 #include "../includes/pipex.h"
 
+static void	close_them(void)
+{
+	close(0);
+	close(1);
+	close(2);
+}
+
 void	free_array(char **array)
 {
 	int	i;
@@ -35,9 +42,6 @@ void	close_fds_b(t_pipex_b *pipex)
 		close(pipex->outfile);
 	if (pipex->temp_fd != -1)
 		close(pipex->temp_fd);
-	close(0);
-	close(1);
-	close(2);
 }
 
 void	free_pipex_b(t_pipex_b *pipex)
@@ -86,5 +90,6 @@ void	error_b(t_pipex_b *pipex, char c)
 		perror("Creating dup2.\n");
 	else if (c == 'E')
 		perror("Execve.\n");
+	close_them();
 	exit(1);
 }

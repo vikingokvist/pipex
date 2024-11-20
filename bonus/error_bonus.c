@@ -12,7 +12,7 @@
 
 #include "../includes/pipex.h"
 
-static void	close_them(void)
+void	close_them(void)
 {
 	close(0);
 	close(1);

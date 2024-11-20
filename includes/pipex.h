@@ -65,5 +65,6 @@ void	free_pipex_b(t_pipex_b *pipex);
 void	close_fds_b(t_pipex_b *pipex);
 void	do_forks_b(t_pipex_b *pipex);
 void	free_array(char **array);
+void	close_them(void);
 
 #endif

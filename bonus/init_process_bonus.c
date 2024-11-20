@@ -50,9 +50,7 @@ void	init_fds_b(t_pipex_b *pipex, int argc, char **argv)
 		if (access(argv[1], F_OK) == -1)
 		{
 			perror("Error: Incorrect fd.\n");
-			close(0);
-			close(1);
-			close(2);
+			close_them();
 			exit(1);
 		}
 		pipex->infile = open(argv[1], O_RDONLY);

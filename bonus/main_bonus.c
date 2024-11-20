@@ -18,8 +18,8 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc < 5)
 		error_b(&pipex, 'A');
-	init_struct(&pipex, argc, envp);
 	init_fds_b(&pipex, argc, argv);
+	init_struct(&pipex, argc, envp);
 	get_commands_b(&pipex, argv);
 	do_forks_b(&pipex);
 	error_b(&pipex, '!');

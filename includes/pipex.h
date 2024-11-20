@@ -42,12 +42,12 @@ void	error(t_pipex *pipex, char c);
 void	free_pipex(t_pipex *pipex);
 void	close_fds(t_pipex *pipex);
 
-
 typedef struct s_pipex_b
 {
 	int		fd[2];
 	int		infile;
 	int		outfile;
+	int		n;
 	int		temp_fd;
 	int		n_cmds;
 	pid_t	pid;
@@ -55,7 +55,6 @@ typedef struct s_pipex_b
 	char	**full_path;
 	char	**envp;
 }	t_pipex_b;
-
 
 void	init_struct(t_pipex_b *pipex, int argc, char **envp);
 void	init_fds_b(t_pipex_b *pipex, int argc, char **argv);
@@ -66,6 +65,5 @@ void	free_pipex_b(t_pipex_b *pipex);
 void	close_fds_b(t_pipex_b *pipex);
 void	do_forks_b(t_pipex_b *pipex);
 void	free_array(char **array);
-
 
 #endif

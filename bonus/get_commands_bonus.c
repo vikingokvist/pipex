@@ -20,10 +20,10 @@ void	get_commands_b(t_pipex_b *pipex, char **argv)
 	i = 0;
 	while (i < pipex->n_cmds)
 	{
-		temp1 = ft_split(argv[i + 2], ' ');
+		temp1 = ft_split(argv[i + pipex->n - 1], ' ');
 		if (!temp1)
 			error_b(pipex, 'p');
-		pipex->argv_cmd[i] = argv[i + 2];
+		pipex->argv_cmd[i] = argv[i + pipex->n - 1];
 		if (!pipex->argv_cmd[i])
 			error_b(pipex, 'p');
 		pipex->full_path[i] = ft_strjoin("/usr/bin/", temp1[0]);
@@ -32,5 +32,4 @@ void	get_commands_b(t_pipex_b *pipex, char **argv)
 		free_array(temp1);
 		i++;
 	}
-	
 }

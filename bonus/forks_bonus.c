@@ -49,8 +49,6 @@ void	do_forks_b(t_pipex_b *pipex)
 		pipex->temp_fd = pipex->fd[0];
 		i++;
 	}
-	// close(pipex->infile);
-	// close(pipex->outfile);
 	while (i-- > 0)
 		waitpid(pipex->pid, NULL, 0);
 }

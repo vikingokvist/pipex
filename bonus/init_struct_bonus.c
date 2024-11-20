@@ -14,7 +14,7 @@
 
 void	init_struct(t_pipex_b *pipex, int argc, char **envp)
 {
-	pipex->n_cmds = argc - 3;
+	pipex->n_cmds = argc - pipex->n;
 	pipex->argv_cmd = malloc(sizeof(char *) * pipex->n_cmds);
 	if (!pipex->argv_cmd)
 		error_b(pipex, '!');

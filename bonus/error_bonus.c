@@ -45,7 +45,6 @@ void	free_pipex_b(t_pipex_b *pipex)
 	int	i;
 
 	i = 0;
-	
 	if (pipex->argv_cmd)
 		free(pipex->argv_cmd);
 	i = 0;
@@ -59,7 +58,7 @@ void	free_pipex_b(t_pipex_b *pipex)
 		}
 		if (pipex->full_path)
 			free(pipex->full_path);
-	}		
+	}
 }
 
 void	error_b(t_pipex_b *pipex, char c)
@@ -69,7 +68,7 @@ void	error_b(t_pipex_b *pipex, char c)
 	if (c != '!')
 		perror("Error\n");
 	if (c == 'A')
-		perror("Wrong amount of Arguments.\n./pipex infile cmd1 cmd2 cmd3 etc.. outfile");
+		perror("Wrong amount of Arguments.\n./pipex infile cmd1 etc.. outfile");
 	else if (c == 'O')
 		perror("Opening infile.\n");
 	else if (c == 'o')

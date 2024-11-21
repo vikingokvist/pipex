@@ -38,7 +38,7 @@ void	free_pipex(t_pipex *pipex)
 	free(pipex->argv_cmd2);
 }
 
-static void	close_them(void)
+void	close_them(void)
 {
 	close(0);
 	close(1);
